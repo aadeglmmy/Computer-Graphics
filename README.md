@@ -75,10 +75,6 @@ You can adjust the layout, size, or other visual aspects of the application by m
 
 If you would like to contribute to this project, feel free to submit issues or pull requests. Enhancements such as better color conversion algorithms, additional color models (like HSV or LAB), or a more advanced user interface are welcome.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 Enjoy exploring color theory with this interactive tool!
