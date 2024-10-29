@@ -36,17 +36,17 @@ To run the program, you need:
 
 1. Clone or download the repository to your local machine:
     ```bash
-    git clone https://github.com/your-username/color-models-app.git
+    git clone git@github.com:aadeglmmy/Computer-Graphics.git
     ```
 
 2. Navigate to the directory where the script is saved:
     ```bash
-    cd color-models-app
+    cd Computer-Graphics
     ```
 
 3. Run the program:
     ```bash
-    python color_models.py
+    python KG1.py
     ```
 
 ### How to Use
@@ -70,6 +70,78 @@ You can adjust the layout, size, or other visual aspects of the application by m
 
 - The program assumes valid inputs within the defined range for each color model. However, input validation is implemented to clamp values to valid ranges.
 - The CMYK to RGB conversion might not match exactly with what some design tools or color systems display, as different conversion algorithms may be used.
+
+# Image Processing Application
+
+This is a graphical application built with Python, `Tkinter`, `OpenCV`, and `PIL` libraries that allows users to load images and apply various filters for analysis and preprocessing. The program provides basic image processing tools, including thresholding, median filtering, and min/max filters.
+
+## Features
+
+- **Load Image**: Load a grayscale image for processing.
+- **Otsu Thresholding**: Automatically calculates an optimal threshold to separate objects in an image.
+- **Fixed Thresholding**: Applies a fixed threshold to create a binary image.
+- **Median Filter**: Smooths the image to reduce noise while preserving edges.
+- **Min Filter**: Highlights darker regions in the image.
+- **Max Filter**: Highlights brighter regions in the image.
+
+## Requirements
+
+- Python 3.x
+- Libraries:
+  - `opencv-python`
+  - `numpy`
+  - `Pillow` (PIL)
+
+Install the required packages with:
+```bash
+pip install opencv-python numpy pillow
+```
+
+## Filter Descriptions and Practical Use Cases
+
+1. **Otsu Thresholding**:
+   - **Description**: An automatic thresholding algorithm that calculates an optimal threshold value based on histogram analysis, separating the image into foreground and background.
+   - **Application**: Widely used in segmentation tasks where objects need to be separated from the background, such as in medical imaging to highlight tumors, or in industrial inspection for defect detection.
+
+2. **Fixed Thresholding**:
+   - **Description**: A simple threshold filter that converts pixel values above a fixed level (127) to white and those below to black.
+   - **Application**: Suitable for images with clear object-background separation, such as document scanning or black-and-white image processing.
+
+3. **Median Filter**:
+   - **Description**: A filter that replaces each pixel's value with the median of its neighboring pixels, effectively reducing noise while maintaining edge clarity.
+   - **Application**: Often used in image preprocessing before segmentation or recognition tasks, such as in surveillance or medical imaging to remove minor noise.
+
+4. **Min Filter**:
+   - **Description**: A morphological erosion operation that replaces each pixel with the minimum value among its neighbors, effectively reducing bright regions.
+   - **Application**: Useful for removing small white noise, thinning light lines, and enhancing object boundaries, particularly in scanned document processing or in detecting minor bright defects.
+
+5. **Max Filter**:
+   - **Description**: A morphological dilation operation that replaces each pixel with the maximum value of its neighbors, expanding bright regions.
+   - **Application**: Used to fill small dark holes or enhance bright objects, such as in defect detection, texture analysis, or edge detection.
+
+## How to Run the Application
+
+1. **Run the application**:
+    ```bash
+    python KG2.py
+    ```
+2. **Load an Image**:
+    - Click the "Load Image" button to select a grayscale image for processing.
+
+3. **Apply Filters**:
+    - Use the corresponding buttons to apply various image processing filters:
+      - **Otsu Thresholding**: Automatically segments objects and background.
+      - **Fixed Thresholding**: Applies a fixed threshold for binarization.
+      - **Median Filter**: Reduces noise while preserving edges.
+      - **Min Filter**: Diminishes bright areas.
+      - **Max Filter**: Enhances bright areas.
+
+4. **View Results**:
+    - After applying a filter, the result is displayed on the screen, replacing the original image view.
+
+## File Structure
+
+- `KG2.py`: The main application file containing the GUI and image processing logic.
 
 ## Contributing
 
