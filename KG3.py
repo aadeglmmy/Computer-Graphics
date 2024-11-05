@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import time
 
@@ -136,13 +137,18 @@ def bresenham_circle(x1, y1, radius):
     return points
 
 
-def plot_points(ax, points, color='red', markersize=1, smooth=False):
-    x_coords, y_coords = zip(*points)
+# def plot_points(ax, points, color='red', markersize=1, smooth=False):
+#     x_coords, y_coords = zip(*points)
+#
+#     if smooth:
+#         ax.plot(x_coords, y_coords, color=color, linewidth=2, alpha=0.8, linestyle='-', antialiased=True)
+#     else:
+#         ax.plot(x_coords, y_coords, 'o', color=color, markersize=markersize)
 
-    if smooth:
-        ax.plot(x_coords, y_coords, color=color, linewidth=2, alpha=0.8, linestyle='-', antialiased=True)
-    else:
-        ax.plot(x_coords, y_coords, 'o', color=color, markersize=markersize)
+def plot_points(ax, points, color='red'):
+    for x, y in points:
+        square = patches.Rectangle((x, y), 1, 1, linewidth=0, facecolor=color)
+        ax.add_patch(square)
 
 
 def draw_graph():
@@ -154,20 +160,25 @@ def draw_graph():
     fig.clf()
     ax = fig.add_subplot(111)
 
-    ax.set_xticks(range(-15, 16, 1))
-    ax.set_yticks(range(-15, 16, 1))
+    try:
+        a = abs(int(scale_entry.get()))
+    except ValueError:
+        error_label.config(text='Ошибка: введите целочисленное значение для масштаба')
+
+    ax.set_xticks(range(-a, a + 1, a // 10 if a > 15 else 1))
+    ax.set_yticks(range(-a, a + 1, a // 10 if a > 15 else 1))
     ax.grid(True, which='both', color='lightgray', linewidth=0.5)
     ax.axhline(0, color='black', linewidth=1)
     ax.axvline(0, color='black', linewidth=1)
     ax.set_aspect('equal')
 
-    ax.set_xlim(-15, 15)
-    ax.set_ylim(-15, 15)
+    ax.set_xlim(-a, a)
+    ax.set_ylim(-a, a)
 
     for label in labels:
         line_data = lines_data[label]
         if line_data['points']:
-            plot_points(ax, line_data["points"], color=line_data["color"], markersize=5, smooth=False)
+            plot_points(ax, line_data["points"], color=line_data["color"])
 
     ax.set_title("Различные алгоритмы линий")
     ax.set_xlabel('X')
@@ -249,6 +260,15 @@ def clear_all():
     draw_graph()
 
 
+def update_scale():
+    try:
+        a = abs(int(scale_entry.get()))
+        draw_graph()
+        error_label.config(text=f"Масштаб изменен на [-{a}, {a}] по обеим осям")
+    except ValueError:
+        error_label.config(text="Ошибка: введите целочисленное значение для масштаба.")
+
+
 app = tk.Tk()
 app.title("Графическое приложение для растеризации")
 
@@ -304,6 +324,15 @@ button_clear_circle.pack(pady=5)
 
 button_clear_all = ttk.Button(left_frame, text="Удалить всё", command=clear_all)
 button_clear_all.pack(pady=10)
+
+scale_label = ttk.Label(left_frame, text="Масштаб:")
+scale_label.pack(pady=2)
+scale_entry = ttk.Entry(left_frame, width=5)
+scale_entry.pack(pady=2)
+scale_entry.insert(0, "15")
+
+button_update_scale = ttk.Button(left_frame, text="Изменить масштаб", command=update_scale)
+button_update_scale.pack(pady=10)
 
 error_frame = ttk.Frame(left_frame, width=200, height=100)
 error_frame.pack(side="top", pady=5)
