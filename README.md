@@ -143,6 +143,78 @@ pip install opencv-python numpy pillow
 
 - `KG2.py`: The main application file containing the GUI and image processing logic.
 
+# Rasterization Graphics Application
+
+This graphical application, built with Python's Tkinter and Matplotlib, visualizes different line and circle rasterization algorithms. It allows users to input coordinates and radius values, select an algorithm, and draw lines or circles using specified algorithms. The interface also provides options to clear specific lines or all shapes from the graph.
+
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Algorithms](#algorithms)
+- [Error Handling](#error-handling)
+- [Acknowledgements](#acknowledgements)
+
+## Features
+- **Draw Lines and Circles**: Supports different rasterization algorithms for lines and circles, including:
+  - Step-by-Step Line
+  - Digital Differential Analyzer (DDA) Line
+  - Bresenham Line
+  - Bresenham Circle
+- **Performance Measurement**: Calculates and displays the execution time of each algorithm.
+- **Clear Options**: Remove individual lines or circles, or clear all shapes from the graph.
+- **Visual Customization**: Graph grid with adjustable markers and axis settings.
+
+## Installation
+### Requirements
+- Python 3.x
+- Libraries:
+  - `tkinter`
+  - `ttk` from Tkinter
+  - `matplotlib`
+
+### Setup
+1. Clone the repository or download the code file.
+2. Install Matplotlib if it is not already installed:
+   ```bash
+   pip install matplotlib
+   ```
+3. Run the program:
+   ```bash
+   python KG3.py
+   ```
+
+## Usage
+1. **Input Coordinates and Radius**:
+   - Enter `X1`, `Y1`, `X2`, and `Y2` values for line algorithms.
+   - For circles, enter `X1`, `Y1`, and a `Radius`.
+2. **Select an Algorithm**:
+   - Click on the algorithm button you want to execute. 
+   - The program will compute and display the points on the graph and show the execution time in milliseconds.
+3. **Clear Lines or Circles**:
+   - Use the "Clear" buttons to remove specific lines or the entire graph.
+
+## Algorithms
+### Step-by-Step Line
+Computes line points incrementally by calculating intermediate points from `X1` to `X2`. Adjusts for slope and intercept.
+
+### DDA (Digital Differential Analyzer) Line
+Divides the line into steps based on the greatest change between `dx` and `dy`, generating points incrementally.
+
+### Bresenham Line
+A more optimized line rasterization algorithm using integer calculations to reduce error accumulation.
+
+### Bresenham Circle
+A circle-drawing algorithm that plots points symmetrically to form a circle with minimal computational effort.
+
+## Error Handling
+- **Input Validation**: Checks for integer inputs. If invalid values are entered, an error message will display below the input fields.
+- **Execution Time Display**: Execution time is displayed only if the algorithm runs successfully.
+
+## Acknowledgements
+- Algorithms are based on common rasterization methods for graphics.
+- Developed using Python and Tkinter for GUI, with Matplotlib for graphical display.
+
 ## Contributing
 
 If you would like to contribute to this project, feel free to submit issues or pull requests. Enhancements such as better color conversion algorithms, additional color models (like HSV or LAB), or a more advanced user interface are welcome.
